@@ -1,0 +1,54 @@
+{
+  "datasetName": "Flood Risk in India (Kaggle)",
+  "classification": "SYNTHETIC / SAMPLE BENCHMARK DATASET",
+  "totalRows": 10000,
+  "totalColumns": 14,
+  "columns": [
+    "Latitude",
+    "Longitude",
+    "Rainfall (mm)",
+    "Temperature (\u00b0C)",
+    "Humidity (%)",
+    "River Discharge (m\u00b3/s)",
+    "Water Level (m)",
+    "Elevation (m)",
+    "Land Cover",
+    "Soil Type",
+    "Population Density",
+    "Infrastructure",
+    "Historical Floods",
+    "Flood Occurred"
+  ],
+  "summary": {
+    "rainfall": {
+      "mean": 150.0151183736939,
+      "min": 0.014437168293524,
+      "max": 299.9702931027695
+    },
+    "humidity": {
+      "mean": 59.74910444350339,
+      "min": 20.001338900634774,
+      "max": 99.9977717894386
+    },
+    "discharge": {
+      "mean": 2515.7229457858452,
+      "min": 0.0421610565215502,
+      "max": 4999.698480228592
+    },
+    "waterLevel": {
+      "mean": 5.01788115473317,
+      "min": 0.0027012235672785,
+      "max": 9.996898773860396
+    },
+    "elevation": {
+      "mean": 4417.138176822381,
+      "min": 1.1503397240072708,
+      "max": 8846.894877202165
+    }
+  },
+  "targetDistribution": {
+    "floodOccurred_1": 5057,
+    "floodOccurred_0": 4943
+  },
+  "scientificNote": "Empirical analysis proves attributes follow uniform distributions across Pan-India without physical hydrological correlation. Designated purely for tabular pipeline testing."
+}

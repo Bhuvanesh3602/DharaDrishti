@@ -1,0 +1,182 @@
+{
+  "N01": {
+    "name": "Solang Nullah",
+    "floodProbability": 0.3102,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0642,
+      0.2108,
+      0.0579,
+      0.8205,
+      0.1869,
+      0.406
+    ]
+  },
+  "N02": {
+    "name": "Palchan Bridge",
+    "floodProbability": 0.3124,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0657,
+      0.1715,
+      0.0228,
+      0.8492,
+      0.1431,
+      0.3736
+    ]
+  },
+  "N03": {
+    "name": "Manali (Old Town)",
+    "floodProbability": 0.3116,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0837,
+      0.1381,
+      0.0,
+      0.8574,
+      0.1392,
+      0.3278
+    ]
+  },
+  "N04": {
+    "name": "Naggar Heritage Hub",
+    "floodProbability": 0.3089,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0704,
+      0.1365,
+      0.0166,
+      0.8173,
+      0.159,
+      0.2916
+    ]
+  },
+  "N05": {
+    "name": "Raison River Station",
+    "floodProbability": 0.3023,
+    "riskScore": 30,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0782,
+      0.1628,
+      0.0663,
+      0.8255,
+      0.1993,
+      0.2702
+    ]
+  },
+  "N06": {
+    "name": "Kullu City (Sultanpur)",
+    "floodProbability": 0.308,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.0973,
+      0.1569,
+      0.0669,
+      0.7726,
+      0.1851,
+      0.2703
+    ]
+  },
+  "N07": {
+    "name": "Mohal Research Station",
+    "floodProbability": 0.3109,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1042,
+      0.1379,
+      0.0825,
+      0.724,
+      0.1905,
+      0.2493
+    ]
+  },
+  "N08": {
+    "name": "Kasol (Parbati Valley)",
+    "floodProbability": 0.2904,
+    "riskScore": 29,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1895,
+      0.2467,
+      0.0523,
+      0.9149,
+      0.1989,
+      0.2122
+    ]
+  },
+  "N09": {
+    "name": "Shamshi Industrial Area",
+    "floodProbability": 0.3112,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1068,
+      0.1358,
+      0.0789,
+      0.7166,
+      0.2025,
+      0.2581
+    ]
+  },
+  "N10": {
+    "name": "Bhuntar Junction & Airport",
+    "floodProbability": 0.3068,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1331,
+      0.1477,
+      0.0308,
+      0.8032,
+      0.1867,
+      0.258
+    ]
+  },
+  "N11": {
+    "name": "Bajaura Valley Gateway",
+    "floodProbability": 0.3101,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1367,
+      0.1135,
+      0.037,
+      0.7661,
+      0.2146,
+      0.2621
+    ]
+  },
+  "N12": {
+    "name": "Larji Inflow & Hydro Hub",
+    "floodProbability": 0.3137,
+    "riskScore": 31,
+    "embedding": [
+      0.0,
+      0.0,
+      0.1754,
+      0.1246,
+      0.0087,
+      0.7409,
+      0.2155,
+      0.2855
+    ]
+  }
+}

@@ -1,0 +1,208 @@
+================================================================================
+DHARADRISHTI — TERRAIN-AWARE HYPERLOCAL FLASH FLOOD DECISION SUPPORT SYSTEM
+SIH PS 26192: Flash Flood Prediction System for Hilly Regions using Multi-Source Data
+Target Organization: National Disaster Response Force (NDRF), MHA DM Division
+Region Focus: Upper Beas Valley (Kullu–Manali Corridor, Himachal Pradesh)
+================================================================================
+
+1. EXECUTIVE ARCHITECTURE OVERVIEW
+--------------------------------------------------------------------------------
+DharaDrishti is a terrain-aware emergency decision support system tailored for
+steep mountainous catchments prone to cloudbursts and flash floods. Rather than
+treating monitoring stations as isolated statistical points, DharaDrishti models
+the river corridor as a Directed Hydrological Drainage Graph (DHDG):
+
+  [Rainfall, Weather, Soil Moisture, River Discharge, Historical Records]
+                                 │
+                                 ▼
+                     ┌───────────────────────┐
+                     │   MULTI-SOURCE FUSION │
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ TERRAIN / TOPOGRAPHY  │
+                     │ Elevation, Slope, DEM │
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ DIRECTED DRAINAGE     │
+                     │ HYDROLOGICAL GRAPH    │
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ SPATIAL AGGREGATION   │
+                     │ GraphSAGE Architecture│
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ TEMPORAL FORECASTING  │
+                     │ (NOW, +1h, +2h, +3h)  │
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ RISK & UNCERTAINTY    │
+                     │ Node/Corridor Prob.   │
+                     └───────────┬───────────┘
+                                 ▼
+                     ┌───────────────────────┐
+                     │ ACTIONABLE ALERTING   │
+                     │ Hyperlocal NDRF CAP   │
+                     └───────────────────────┘
+
+--------------------------------------------------------------------------------
+2. DATASET AUDIT & SCIENTIFIC HONESTY
+--------------------------------------------------------------------------------
+A. Kaggle Dataset ("flood_risk_dataset_india.csv"):
+   - Records: 10,000 rows, 14 attributes.
+   - Spatial coverage: Pan-India bounding box (Lat 8.00–36.99, Lon 68.00–96.99).
+   - Statistical Diagnosis: Uniform synthetic distributions across all variables
+     with near-zero cross-correlation with the binary flood label (~0.00 to 0.02).
+   - Classification in System: Explicitly labeled as "SYNTHETIC / SAMPLE BENCHMARK".
+   - Purpose: Validating data ingestion pipelines, feature scaling, and tabular
+     ML baselines. It is NEVER falsely presented as actual Kullu ground truth.
+
+B. HiFlo-DAT ("HiFlo-DAT_Merged_FINAL_24.8.21.xlsx" & Unmerged):
+   - Scope: Authentic, peer-reviewed historical database of 128 flood events (1846–2020)
+     across 309 documented source records in the Upper Beas Catchment (Kullu Valley).
+   - Actual Coordinates: 100% of merged records have verified lat/lon coordinates
+     bounded within Lat 31.784°N – 32.353°N and Lon 77.087°E – 77.448°E.
+   - Classification in System: Labeled as "AUTHENTIC HISTORICAL OBSERVATIONS".
+   - Purpose: Historical spatial reference, event validation, and interactive
+     flood replay mode for major historical cloudbursts (e.g., 1995, 2003, 2018).
+
+--------------------------------------------------------------------------------
+3. GRAPH TOPOLOGY — KULLU–MANALI RIVER CORRIDOR
+--------------------------------------------------------------------------------
+The graph nodes represent actual sub-catchments, hydrometric stations, and 
+vulnerable riverine settlements along the Beas River and its tributaries 
+(Solang, Manaslu, Allain, Duhangan, Sarvari, Parbati, Sainj):
+
+   [N01: Solang Nullah] (Elevation: 2,480m)
+             │
+             ▼
+   [N02: Palchan Bridge] (Elevation: 2,210m)
+             │
+             ▼
+   [N03: Manali Old Town / Manaslu] (Elevation: 2,050m)
+             │
+             ├──────────────────────────┐
+             ▼                          │
+   [N04: Naggar / Duhangan] (1,760m)    │
+             │                          │
+             ▼                          │
+   [N05: Raison Valley Station] (1,430m) ◄ (Primary Demo Node)
+             │
+             ▼
+   [N06: Sultanpur / Kullu City] (1,220m)
+             │
+             ├──────────────────────────┐
+             ▼                          ▼
+   [N07: Shamshi Industrial Corridor] [N08: Parbati Confluence / Kasol]
+             │                          │
+             └─────────────┬────────────┘
+                           ▼
+   [N09: Bhuntar Airport / River Junction] (1,080m)
+                           │
+                           ▼
+   [N10: Bajaura Gateway] (960m)
+                           │
+                           ▼
+   [N11: Larji Reservoir Inflow] (910m)
+
+Edge Formulation:
+Edges are strictly directed downstream based on Digital Elevation Model (DEM)
+drainage vectors and river connectivity, not Euclidean proximity.
+
+--------------------------------------------------------------------------------
+4. THE 8-STAGE VISUAL GRAPH WORKFLOW (LIVE STATE MACHINE)
+--------------------------------------------------------------------------------
+The core innovation demanded by SIH PS 26192 is explainability. The judges must
+see how sensor inputs propagate through Graph Neural Network neighbor aggregation:
+
+  Stage 1: SENSOR INPUT CHANGED
+           Live IoT telemetry adjustment (Rainfall, Soil Saturation, River Level).
+  Stage 2: NODE FEATURE UPDATE
+           Target node (e.g., Raison) feature vector dynamically updates.
+  Stage 3: NEIGHBOR AGGREGATION
+           Upstream parents (Manali, Naggar) and connected drainage nodes transfer
+           feature state along directed edges. Visualized via animated particle flow.
+  Stage 4: GRAPHSAGE SPATIAL TRANSFORMATION
+           Aggregation function: h_N(v) = AGGREGATE({h_u, ∀ u ∈ N(v)})
+           Concatenation & transformation: h_v = σ(W · [h_v || h_N(v)])
+  Stage 5: NODE EMBEDDING & RISK RECALCULATION
+           Raison risk score transitions (e.g., 42 -> 86 CRITICAL).
+  Stage 6: DOWNSTREAM RISK PROPAGATION
+           Excess hydraulic risk cascades along directed edges to Kullu, Shamshi,
+           and Bajaura with elevation-derived routing latency.
+  Stage 7: HYPERLOCAL VILLAGE IMPACT
+           Downstream vulnerable settlements transition to WATCH/WARNING.
+  Stage 8: ACTIONABLE NDRF ALERT GENERATION
+           Standard Common Alerting Protocol (CAP) warning dispatched with lead-time,
+           confidence score, and evacuation guidance.
+
+--------------------------------------------------------------------------------
+5. FRONTEND / DASHBOARD STACK & SCREEN DESIGN
+--------------------------------------------------------------------------------
+Architecture: Modern single-page web application
+  - Engine: Vite + React 18 + TypeScript
+  - Styling: Tailwind CSS (emergency dark tactical theme, clean NDRF color palette)
+  - Cartography: Leaflet.js + React-Leaflet with OpenStreetMap terrain basemap
+  - Visualizations: Recharts for hydrological hydrographs & confidence trends
+  - Icons: Lucide-React
+
+Key Views:
+1. SITUATION COMMAND: Integrated live map, active flood warning feed, corridor
+   overview, and the persistent "GRAPH INTELLIGENCE — LIVE MODEL WORKFLOW" panel.
+2. TERRAIN & DRAINAGE: Topographic profile, slope angle analysis, catchments,
+   and 3D-inspired node-link drainage topology.
+3. SENSORS & WHAT-IF SIMULATOR: Multi-station interactive sliders for rainfall (mm/h),
+   soil saturation (%), river stage (m), slope displacement (mm/h), and individual
+   sensor ONLINE / OFFLINE toggles.
+4. SPATIO-TEMPORAL FORECAST: Hydrograph projections for NOW, +1h, +2h, +3h with
+   probabilistic upper/lower confidence bounds.
+5. NDRF ALERT CENTER: Official CAP-compliant alerts with urgency, severity, certainty,
+   and suggested tactical response (e.g., deploy NDRF 14th Bn at Bhuntar).
+6. HISTORICAL REPLAY: HiFlo-DAT historical browser with interactive replay of 
+   historical cloudbursts and comparison against modern vulnerability.
+7. SYSTEM ARCHITECTURE & INTEGRITY: Detailed lineage of data, GNN formulation,
+   and explicit labeling of synthetic vs. authentic data sources.
+
+--------------------------------------------------------------------------------
+6. RISK & UNCERTAINTY QUANTIFICATION ENGINE
+--------------------------------------------------------------------------------
+Deterministic Risk Formulation (for rapid, transparent, interpretable demo):
+  Risk_node = Clamp_0_100 (
+      0.35 * LocalRainfallFactor
+    + 0.25 * SoilSaturationFactor
+    + 0.20 * RiverStageFactor
+    + 0.10 * SlopeInstabilityFactor
+    + 0.10 * UpstreamRiskCascadeFactor
+  )
+
+Confidence Metric:
+  Confidence decreases dynamically when:
+  - Any upstream or local sensor goes OFFLINE.
+  - Telemetry variance indicates sensor drift or anomaly.
+  - Rainfall exceeds historical empirical calibration maxima.
+
+--------------------------------------------------------------------------------
+7. STEP-BY-STEP DEMO SCRIPT FOR SIH JUDGES (2–3 MINUTES)
+--------------------------------------------------------------------------------
+Step 1: Present baseline Situation Dashboard in "Normal Monsoon" mode.
+Step 2: Navigate to Sensor Controls or What-If Simulator.
+Step 3: Move "Raison Rainfall" slider from 45 mm/h to 95 mm/h (Cloudburst simulation).
+Step 4: Point judges to the LIVE GRAPH WORKFLOW panel:
+        - Stage 1 illuminates: SENSOR CHANGE DETECTED (+50 mm/h).
+        - Stage 2 illuminates: RAISON NODE FEATURE UPDATED.
+        - Stage 3 illuminates: NEIGHBOR AGGREGATION (Upstream Manali & Naggar flow in).
+        - Stage 4 illuminates: GRAPHSAGE SPATIAL EMBEDDING COMPUTED.
+        - Stage 5 illuminates: RAISON RISK RISES 42 -> 86 (CRITICAL).
+        - Stage 6 illuminates: DOWNSTREAM PROPAGATION along Beas river to Kullu.
+        - Stage 7 illuminates: VILLAGE IMPACT (Sultanpur & Akhara Bazar alerted).
+        - Stage 8 illuminates: OFFICIAL NDRF CRITICAL FLASH FLOOD WARNING ISSUED.
+Step 5: Toggle "Sensor R05 (Raison) OFFLINE":
+        - Show immediate confidence score drop from 84% to 58%.
+        - Demonstrate uncertainty-aware decision guidance ("VERIFY / GROUND PATROL").
+Step 6: Restore sensor and view Historical Replay from HiFlo-DAT (e.g., 1995 flood).
+Step 7: Conclude with architecture explanation and data integrity principles.
+================================================================================

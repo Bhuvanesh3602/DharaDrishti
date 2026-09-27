@@ -1,0 +1,327 @@
+@import "leaflet/dist/leaflet.css";
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, ::before, ::after {
+  font-family: "Bricolage Grotesque", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-style: normal;
+  font-variation-settings: "wdth" 100 !important;
+}
+
+:root {
+  --brand-primary: #2563eb;
+  --brand-success: #10b981;
+  --brand-warning: #f59e0b;
+  --brand-danger: #ef4444;
+  --brand-purple: #8b5cf6;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #121316;
+  color: #0f172a;
+  font-family: "Bricolage Grotesque", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-style: normal;
+  font-variation-settings: "wdth" 100 !important;
+  overflow-x: hidden;
+}
+
+.bricolage-grotesque {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+/* Striped pattern for hydrograph baseline bars (matching sample_ui.jpeg) */
+.bg-striped-bars {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.08) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* ═══ Scrollbar ═══ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #e5e7eb; }
+::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DHARADRISHTI MAP — Leaflet visual layer
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Container background while tiles load */
+.leaflet-container {
+  background: #0c1222 !important;
+  font-family: inherit;
+}
+
+/* Zoom buttons */
+.leaflet-bar a {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+.leaflet-bar a:hover {
+  background-color: #334155 !important;
+}
+
+/* ── Basemap tiles: desaturate + darken OSM into a tactical dark theme ── */
+.dd-basemap-tiles {
+  filter: brightness(0.38) contrast(1.15) saturate(0.25) !important;
+}
+
+/* ── Tooltips ── */
+.dd-tooltip {
+  background: rgba(15,23,42,0.94) !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+  color: #e2e8f0 !important;
+  padding: 6px 10px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+  font-family: inherit !important;
+}
+.dd-tooltip::before { border: none !important; }
+.leaflet-tooltip-top.dd-tooltip::before,
+.leaflet-tooltip-bottom.dd-tooltip::before,
+.leaflet-tooltip-left.dd-tooltip::before,
+.leaflet-tooltip-right.dd-tooltip::before {
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.dd-tip {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.dd-tip-name {
+  font-weight: 700;
+  font-size: 12px;
+  color: #f8fafc;
+  margin-bottom: 2px;
+}
+.dd-tip-meta {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+.dd-tip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dd-tip-row span {
+  color: #94a3b8;
+}
+.dd-tip-row strong {
+  color: #e2e8f0;
+}
+
+/* ── Popups ── */
+.dd-popup .leaflet-popup-content-wrapper {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-radius: 8px !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+}
+.dd-popup .leaflet-popup-tip {
+  background: #0f172a !important;
+  border: 1px solid #334155 !important;
+}
+.dd-popup .leaflet-popup-close-button {
+  color: #94a3b8 !important;
+}
+
+/* ── Node markers ── */
+.dd-node-icon {
+  background: transparent !important;
+  border: none !important;
+}
+.dd-node-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dd-node-dot {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.dd-node-dot:hover {
+  transform: scale(1.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.7);
+}
+
+/* Sensor online pip — small green dot at bottom-right of node */
+.dd-sensor-pip {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  border: 1.5px solid #0f172a;
+  z-index: 3;
+  box-shadow: 0 0 4px rgba(74, 222, 128, 0.6);
+}
+
+/* Offline badge */
+.dd-offline-badge {
+  position: absolute;
+  bottom: 0;
+  right: -2px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 7px;
+  font-weight: 800;
+  padding: 0.5px 3px;
+  border-radius: 3px;
+  border: 1.5px solid #0f172a;
+  z-index: 3;
+  letter-spacing: 0.3px;
+}
+
+/* Pulse ring for critical/warning nodes */
+.dd-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0;
+  z-index: 1;
+  animation: ddPulse 2s ease-out infinite;
+}
+.dd-pulse-slow {
+  animation-duration: 3s;
+}
+@keyframes ddPulse {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ── Location labels ── */
+.dd-label-icon {
+  background: transparent !important;
+  border: none !important;
+}
+.dd-node-label {
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1.2;
+}
+.dd-label-elev {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 9px;
+  font-weight: 400;
+  color: #94a3b8;
+  opacity: 0.8;
+}
+
+/* ── Historical markers ── */
+.dd-hist-icon {
+  background: transparent !important;
+  border: none !important;
+}
+.dd-hist-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.85);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #a78bfa;
+  box-shadow: 0 0 6px rgba(139, 92, 246, 0.5);
+}
+
+/* ── Animated edge flow for critical edges ── */
+@keyframes flowDash {
+  to { stroke-dashoffset: -30; }
+}
+.dd-edge-critical {
+  animation: flowDash 0.9s linear infinite;
+}
+.dd-edge-warning {
+  animation: flowDash 1.5s linear infinite;
+}
+
+/* ═══ Legacy animation classes (kept for GraphWorkflow panel) ═══ */
+.animate-flow-edge {
+  stroke-dasharray: 8, 6;
+  animation: flowDash 1.2s linear infinite;
+}
+.animate-flow-edge-critical {
+  stroke-dasharray: 8, 4;
+  animation: flowDash 0.6s linear infinite;
+}
+
+@keyframes pulseRisk {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.18); opacity: 0.4; }
+}
+.animate-risk-pulse {
+  animation: pulseRisk 1.6s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SAMPLE_UI.JPEG DESIGN SYSTEM ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Striped diagonal pattern for dark sleep/hydrograph chart bars */
+.bar-striped {
+  background: repeating-linear-gradient(
+    -45deg,
+    #2c2f38,
+    #2c2f38 3px,
+    #1d1f25 3px,
+    #1d1f25 6px
+  );
+}
+
+/* Smooth bento card styling strictly in the 4 specified brand colors */
+.bento-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(13, 71, 161, 0.06);
+  border: 1px solid #90CAF9;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #0D47A1;
+}
+
+.bento-card-dark {
+  background-color: #0D47A1;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(13, 71, 161, 0.25);
+  border: 1px solid #2196F3;
+  color: #E3F2FD;
+}

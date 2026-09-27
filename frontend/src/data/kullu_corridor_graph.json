@@ -1,0 +1,368 @@
+{
+  "corridor": "Upper Beas Valley (Kullu-Manali Corridor)",
+  "district": "Kullu, Himachal Pradesh",
+  "nodes": [
+    {
+      "id": "N01",
+      "name": "Solang Nullah",
+      "basin": "Solang Catchment (Headwaters)",
+      "lat": 32.315,
+      "lon": 77.158,
+      "elevation": 2480,
+      "slope": 38.5,
+      "river": "Solang River",
+      "sensorId": "S-SOL01",
+      "sensorType": "Ultrasonic Stage + Rain Gauge",
+      "defaultRain": 35.0,
+      "defaultSoil": 58.0,
+      "defaultWaterLevel": 1.1,
+      "population": 1200,
+      "upstream": [],
+      "downstream": [
+        "N02"
+      ]
+    },
+    {
+      "id": "N02",
+      "name": "Palchan Bridge",
+      "basin": "Upper Beas Headwaters",
+      "lat": 32.287,
+      "lon": 77.168,
+      "elevation": 2210,
+      "slope": 34.0,
+      "river": "Beas River (Upper Stem)",
+      "sensorId": "S-PAL02",
+      "sensorType": "Radar Water Level + AWS",
+      "defaultRain": 38.0,
+      "defaultSoil": 62.0,
+      "defaultWaterLevel": 1.4,
+      "population": 2100,
+      "upstream": [
+        "N01"
+      ],
+      "downstream": [
+        "N03"
+      ]
+    },
+    {
+      "id": "N03",
+      "name": "Manali (Old Town)",
+      "basin": "Manaslu - Beas Confluence",
+      "lat": 32.243,
+      "lon": 77.189,
+      "elevation": 2050,
+      "slope": 29.5,
+      "river": "Beas River / Manaslu Khad",
+      "sensorId": "S-MNL03",
+      "sensorType": "Optical Disdrometer + River Gauge",
+      "defaultRain": 42.0,
+      "defaultSoil": 65.0,
+      "defaultWaterLevel": 1.6,
+      "population": 18500,
+      "upstream": [
+        "N02"
+      ],
+      "downstream": [
+        "N04"
+      ]
+    },
+    {
+      "id": "N04",
+      "name": "Naggar Heritage Hub",
+      "basin": "Duhangan - Beas Sub-catchment",
+      "lat": 32.138,
+      "lon": 77.172,
+      "elevation": 1760,
+      "slope": 26.0,
+      "river": "Beas River / Duhangan Nalla",
+      "sensorId": "S-NAG04",
+      "sensorType": "Telemetry Raingauge + Soil TDR",
+      "defaultRain": 40.0,
+      "defaultSoil": 64.0,
+      "defaultWaterLevel": 1.5,
+      "population": 6800,
+      "upstream": [
+        "N03"
+      ],
+      "downstream": [
+        "N05"
+      ]
+    },
+    {
+      "id": "N05",
+      "name": "Raison River Station",
+      "basin": "Mid-Beas Fluvial Corridor",
+      "lat": 32.062,
+      "lon": 77.132,
+      "elevation": 1430,
+      "slope": 22.0,
+      "river": "Beas River (Main Stem)",
+      "sensorId": "S-RAI05",
+      "sensorType": "Doppler River Velocity + Multi-depth TDR",
+      "defaultRain": 45.0,
+      "defaultSoil": 68.0,
+      "defaultWaterLevel": 1.7,
+      "population": 4500,
+      "isPrimaryDemo": true,
+      "upstream": [
+        "N04"
+      ],
+      "downstream": [
+        "N06"
+      ]
+    },
+    {
+      "id": "N06",
+      "name": "Kullu City (Sultanpur)",
+      "basin": "Sarvari - Beas Confluence",
+      "lat": 31.958,
+      "lon": 77.109,
+      "elevation": 1220,
+      "slope": 18.5,
+      "river": "Beas River / Sarvari Nalla",
+      "sensorId": "S-KLU06",
+      "sensorType": "Radar River Stage + Automatic Weather Station",
+      "defaultRain": 36.0,
+      "defaultSoil": 60.0,
+      "defaultWaterLevel": 1.8,
+      "population": 43000,
+      "upstream": [
+        "N05"
+      ],
+      "downstream": [
+        "N07"
+      ]
+    },
+    {
+      "id": "N07",
+      "name": "Mohal Research Station",
+      "basin": "Mohal Khad Sub-basin",
+      "lat": 31.916,
+      "lon": 77.126,
+      "elevation": 1150,
+      "slope": 16.0,
+      "river": "Beas River / Mohal Khad",
+      "sensorId": "S-MOH07",
+      "sensorType": "Tipping Bucket + Barometric Pressure",
+      "defaultRain": 34.0,
+      "defaultSoil": 57.0,
+      "defaultWaterLevel": 1.4,
+      "population": 7200,
+      "upstream": [
+        "N06"
+      ],
+      "downstream": [
+        "N09"
+      ]
+    },
+    {
+      "id": "N08",
+      "name": "Kasol (Parbati Valley)",
+      "basin": "Parbati River Tributary",
+      "lat": 32.01,
+      "lon": 77.316,
+      "elevation": 1580,
+      "slope": 31.0,
+      "river": "Parbati River",
+      "sensorId": "S-KAS08",
+      "sensorType": "CWC Hydro Station + Telemetry Pluviometer",
+      "defaultRain": 48.0,
+      "defaultSoil": 66.0,
+      "defaultWaterLevel": 2.1,
+      "population": 3900,
+      "upstream": [],
+      "downstream": [
+        "N10"
+      ]
+    },
+    {
+      "id": "N09",
+      "name": "Shamshi Industrial Area",
+      "basin": "Lower Valley Floodplain",
+      "lat": 31.895,
+      "lon": 77.142,
+      "elevation": 1110,
+      "slope": 14.0,
+      "river": "Beas River",
+      "sensorId": "S-SHM09",
+      "sensorType": "Radar Stage + Flood Early Warning Siren",
+      "defaultRain": 33.0,
+      "defaultSoil": 59.0,
+      "defaultWaterLevel": 1.6,
+      "population": 11500,
+      "upstream": [
+        "N07"
+      ],
+      "downstream": [
+        "N10"
+      ]
+    },
+    {
+      "id": "N10",
+      "name": "Bhuntar Junction & Airport",
+      "basin": "Beas - Parbati Major Confluence",
+      "lat": 31.878,
+      "lon": 77.153,
+      "elevation": 1080,
+      "slope": 12.5,
+      "river": "Beas - Parbati Combined Flow",
+      "sensorId": "S-BHU10",
+      "sensorType": "Dual Acoustic Doppler Profiler + AAI Met Station",
+      "defaultRain": 35.0,
+      "defaultSoil": 63.0,
+      "defaultWaterLevel": 2.2,
+      "population": 22000,
+      "upstream": [
+        "N08",
+        "N09"
+      ],
+      "downstream": [
+        "N11"
+      ]
+    },
+    {
+      "id": "N11",
+      "name": "Bajaura Valley Gateway",
+      "basin": "Lower Beas Corridor Exit",
+      "lat": 31.849,
+      "lon": 77.158,
+      "elevation": 960,
+      "slope": 11.0,
+      "river": "Beas River",
+      "sensorId": "S-BAJ11",
+      "sensorType": "Discharge Gauge + Warning Station",
+      "defaultRain": 30.0,
+      "defaultSoil": 58.0,
+      "defaultWaterLevel": 2.0,
+      "population": 8400,
+      "upstream": [
+        "N10"
+      ],
+      "downstream": [
+        "N12"
+      ]
+    },
+    {
+      "id": "N12",
+      "name": "Larji Inflow & Hydro Hub",
+      "basin": "Beas - Sainj - Tirthan Confluence",
+      "lat": 31.785,
+      "lon": 77.218,
+      "elevation": 910,
+      "slope": 10.0,
+      "river": "Beas River / Larji Reservoir",
+      "sensorId": "S-LAR12",
+      "sensorType": "Dam Inflow Acoustic Gauge + Sluice Sensor",
+      "defaultRain": 28.0,
+      "defaultSoil": 55.0,
+      "defaultWaterLevel": 2.4,
+      "population": 3100,
+      "upstream": [
+        "N11"
+      ],
+      "downstream": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "E01",
+      "source": "N01",
+      "target": "N02",
+      "name": "Solang to Palchan",
+      "lengthKm": 4.2,
+      "gradientMpk": 64.3,
+      "travelTimeMin": 18
+    },
+    {
+      "id": "E02",
+      "source": "N02",
+      "target": "N03",
+      "name": "Palchan to Manali",
+      "lengthKm": 5.8,
+      "gradientMpk": 27.6,
+      "travelTimeMin": 24
+    },
+    {
+      "id": "E03",
+      "source": "N03",
+      "target": "N04",
+      "name": "Manali to Naggar",
+      "lengthKm": 12.1,
+      "gradientMpk": 24.0,
+      "travelTimeMin": 45
+    },
+    {
+      "id": "E04",
+      "source": "N04",
+      "target": "N05",
+      "name": "Naggar to Raison",
+      "lengthKm": 9.4,
+      "gradientMpk": 35.1,
+      "travelTimeMin": 35
+    },
+    {
+      "id": "E05",
+      "source": "N05",
+      "target": "N06",
+      "name": "Raison to Kullu",
+      "lengthKm": 11.8,
+      "gradientMpk": 17.8,
+      "travelTimeMin": 50
+    },
+    {
+      "id": "E06",
+      "source": "N06",
+      "target": "N07",
+      "name": "Kullu to Mohal",
+      "lengthKm": 4.9,
+      "gradientMpk": 14.3,
+      "travelTimeMin": 20
+    },
+    {
+      "id": "E07",
+      "source": "N07",
+      "target": "N09",
+      "name": "Mohal to Shamshi",
+      "lengthKm": 3.1,
+      "gradientMpk": 12.9,
+      "travelTimeMin": 15
+    },
+    {
+      "id": "E08",
+      "source": "N08",
+      "target": "N10",
+      "name": "Kasol to Bhuntar (Parbati Confluence)",
+      "lengthKm": 24.5,
+      "gradientMpk": 20.4,
+      "travelTimeMin": 90
+    },
+    {
+      "id": "E09",
+      "source": "N09",
+      "target": "N10",
+      "name": "Shamshi to Bhuntar",
+      "lengthKm": 2.2,
+      "gradientMpk": 13.6,
+      "travelTimeMin": 12
+    },
+    {
+      "id": "E10",
+      "source": "N10",
+      "target": "N11",
+      "name": "Bhuntar to Bajaura",
+      "lengthKm": 5.4,
+      "gradientMpk": 22.2,
+      "travelTimeMin": 22
+    },
+    {
+      "id": "E11",
+      "source": "N11",
+      "target": "N12",
+      "name": "Bajaura to Larji Inflow",
+      "lengthKm": 9.8,
+      "gradientMpk": 5.1,
+      "travelTimeMin": 40
+    }
+  ],
+  "primaryDemoNode": "N05"
+}
